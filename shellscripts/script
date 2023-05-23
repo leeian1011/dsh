@@ -1,0 +1,7 @@
+echo this kind of works
+
+
+dollar=dumass
+
+
+echo hi $dollar
