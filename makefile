@@ -5,9 +5,10 @@ directory=src/
 all: ${directory}dsh
 
 ${directory}dsh: ${directory}dsh.c
-	clang -c ${directory}save_dir.c
-	clang -c ${directory}grab_dir.c
-	clang -Wall -Werror -Wextra -o dsh ${directory}dsh.c grab_dir.o save_dir.o
+	clang -c ${directory}lane_functions.c ${directory}list_functions.c
+	clang -Wall -Wextra -o dsh ${directory}dsh.c lane_functions.o list_functions.o
 	
 clean:
 	rm -rf dsh
+	rm -rf lane_functions.o
+	rm -rf list_functions.o

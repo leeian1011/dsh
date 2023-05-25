@@ -8,13 +8,13 @@ typedef struct list{
 }
 list;
 
-/* dir_functions.c  */
-int grab_dir(list *dasher);
 
-/* save_dir.c */
-int save_dir(list *dasher);
+
+/* lane_functions.c  */
+int grab_lane(list *dasher);
+int save_lanes(list *dasher);
 
 /* list_functions.c */
 char *laneAt(list *dasher, int index);
-
+int append(list *dasher, char *lane);
 #endif
