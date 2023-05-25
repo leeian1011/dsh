@@ -36,11 +36,10 @@ int append(list *dasher, char *lane){
     list *iterator = dasher;
     list *newLane = malloc(sizeof(list));
     if(is_empty(dasher)){
-        dasher->position = 0;
-        dasher->lane = lane;
-        dasher->next = NULL;
+         createLane(newLane, 0, "hahmuagfbhjsgfhjasga");
+         dasher = newLane;
+         printf("%s\n%d", newLane->lane, newLane->position);
         printf("dasher is set to %s\n%d\n", dasher->lane, dasher->position);
-        free(newLane);
         return 0;
     }
 
