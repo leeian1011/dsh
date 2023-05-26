@@ -1,15 +1,11 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "dsh.h"
 
-static list *createLane(list *newLane, int position, char *lane){
-    printf("createLane: %s\n", lane);
-    newLane->lane = lane;
+static void create_lane(list *newLane, int position, char *lane){
     newLane->position = position;
+    strcpy(newLane->lane, lane);
     newLane->next = NULL;
-    printf("newLane = :\nlane = %s\npositiion = %d\n", newLane->lane, newLane->position);
-    return newLane;
 }
+
 
 char *laneAt(list *dasher, int index){
     list *iterator = dasher;
@@ -22,34 +18,30 @@ char *laneAt(list *dasher, int index){
 
     return iterator->lane;
 }
-static int is_empty(list *dasherHead){
-    printf("%s\n", dasherHead->lane);
-    if(dasherHead->lane == NULL && dasherHead->next == NULL){
-        printf("iterator is empty\n");
-        return (1);
-    }
-    printf("not empty\n");
-    return 0;
-}
 
-int append(list *dasher, char *lane){
-    list *iterator = dasher;
+
+bool append(list **dasher, char *lane){
+    list *iterator = *dasher;
     list *newLane = malloc(sizeof(list));
-    if(is_empty(dasher)){
-         createLane(newLane, 0, "hahmuagfbhjsgfhjasga");
-         dasher = newLane;
-         printf("%s\n%d", newLane->lane, newLane->position);
-        printf("dasher is set to %s\n%d\n", dasher->lane, dasher->position);
+    if(newLane == NULL){
+        return (-1);
+    }
+    newLane->lane = malloc(strlen(lane) + 1);
+    if(newLane->lane == NULL){
+        return (-1);
+    }
+    if(*dasher == NULL){
+        create_lane(newLane, 0, lane);
+        *dasher = newLane;
         return 0;
     }
-
+    
     while(iterator->next != NULL){
         iterator = iterator->next;
     }
-
-    createLane(newLane, (iterator->position + 1),lane);
-
-    iterator->next = newLane; 
+    
+    create_lane(newLane, ++iterator->position, lane);
+    iterator->next = newLane;
     return 0;
 }
 

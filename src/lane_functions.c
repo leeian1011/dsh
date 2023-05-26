@@ -1,10 +1,6 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-
 #include "dsh.h"
 
-int grab_lane(list *dasher){
+int grab_lane(list **dasher){
     FILE *currentDirectory = popen("pwd", "r");
     if(currentDirectory == NULL){
         return -1;
@@ -13,9 +9,8 @@ int grab_lane(list *dasher){
 
     fread(directory, sizeof(char), 1024, currentDirectory);
     directory[strlen(directory) - 1] = '\0';
-
-    append(dasher, directory);
-    printf("grab_lane : %s\n", directory);
+   printf("%s\n", directory);
+    append(&*dasher, directory);
     pclose(currentDirectory);
     return 0;
 }
@@ -30,7 +25,9 @@ int save_lanes(list *dasher){
 
    while(iterator != NULL){
         fprintf(persistentDir, "%d\n", iterator->position);
+        printf("saver : %d\n", iterator->position);
         fprintf(persistentDir, "%s\n", iterator->lane);
+        printf("saver : %s\n", iterator->lane);
         iterator = iterator->next;
    }
     
