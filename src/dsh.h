@@ -12,12 +12,12 @@ typedef struct list{
 }
 list;
 
-
-
+#define MAX_LANES 5
+#define KILOBYTE 1024
 /* lane_functions.c  */
-int grab_lane(list **dasher);
-int save_lanes(list *dasher);
-
+bool grab_lane(list **dasher);
+bool save_lanes(list *dasher);
+bool load_lanes(list **dasher);
 /* list_functions.c */
 char *laneAt(list *dasher, int index);
 bool append(list **dasher, char *lane);
