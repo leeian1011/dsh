@@ -1,5 +1,15 @@
 #include "dsh.h"
 
+static bool is_empty(FILE *persistentDir){
+    fseek(persistentDir, 0, SEEK_END);
+    long check = ftell(persistentDir);
+    if(check > 0) {return false;}
+
+    rewind(persistentDir);
+    return true;
+}
+
+
 bool grab_lane(list **dasher){
     char directory[KILOBYTE]; 
     FILE *currentDirectory = popen("pwd", "r"); 
@@ -33,11 +43,12 @@ bool save_lanes(list *dasher){
    return (true);
 }
 
+
 bool load_lanes(list **dasher){
     char c;
     int laneIndex = 0;
     int laneByteCount = 0;
-    
+
     FILE *persistentDir = fopen("cache/lanes.txt", "r");
     if(persistentDir == NULL){
         fclose(persistentDir);
@@ -58,12 +69,16 @@ bool load_lanes(list **dasher){
         laneByteCount++;
     }
        
-    printf("loaded lanes\n0:%s\n1:%s\n2:%s\n", laneBuffer[0], laneBuffer[1], laneBuffer[2]);
+    if(is_empty(persistentDir)){
+        fclose(persistentDir);
+        return (true);
+    }
 
     for(int i = 0; i < laneIndex; i++){
         append(*&dasher, laneBuffer[i]);
     }
-
+    
+    fclose(persistentDir);
     return (true); 
     
 }

@@ -5,6 +5,10 @@
 #include <stdio.h>
 #include <string.h>
 
+#define MAX_LANES 5
+#define MAX_COMMANDS 4
+#define KILOBYTE 1024
+
 typedef struct list{
     unsigned int position;
     char *lane;
@@ -12,13 +16,18 @@ typedef struct list{
 }
 list;
 
-#define MAX_LANES 5
-#define KILOBYTE 1024
+
 /* lane_functions.c  */
+bool load_lanes(list **dasher);
 bool grab_lane(list **dasher);
 bool save_lanes(list *dasher);
-bool load_lanes(list **dasher);
+
 /* list_functions.c */
-char *laneAt(list *dasher, int index);
+char *lane_at(list *dasher, int index);
 bool append(list **dasher, char *lane);
+void print_list(list *dasher);
+
+/* options.c */
+char get_option(int argc, char **argv);
+void closest_option(char option);
 #endif

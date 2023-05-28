@@ -5,8 +5,8 @@ directory=src/
 all: ${directory}dsh
 
 ${directory}dsh: ${directory}dsh.c
-	clang -c ${directory}lane_functions.c ${directory}list_functions.c
-	clang -Wall -Wextra -o dsh ${directory}dsh.c lane_functions.o list_functions.o
+	clang -c ${directory}lane_functions.c ${directory}list_functions.c ${directory}options.c
+	clang -Wall -Wextra -o dsh ${directory}dsh.c lane_functions.o list_functions.o options.o
 	
 clean:
 	rm -rf dsh
