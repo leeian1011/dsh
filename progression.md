@@ -1,4 +1,4 @@
-Issue with assigning dasher (the node) to new instance of another node after initializing the new instance.
+1. Issue with assigning dasher (the node) to new instance of another node after initializing the new instance.
 
 - found out that functions in C always makes a copy of the variables passed in as arguments. I thought this "pass by value" only applied to non pointer variables.
 - to ensure that we are modifying the original variables we will have to pass in the memory address of the variable (be it pointer or non pointer variable).
@@ -20,4 +20,23 @@ int append(list *dasher){
     return 0;
 }
 ```
+2. Option handlings, to be honest I took some inspiration from tmux's open source code. I find out that theres this little helpful POSIX library called getopt.h,
+I had some use with it in CS50 but didnt really cross my mind. I tried reading the [openBSD](https://github.com/openbsd/src/blob/master/lib/libc/stdlib/getopt_long.c)
+and the [GNU](https://github.com/gcc-mirror/gcc/blob/master/libiberty/getopt.c) versions of `getopt()` and I just cannot wrap my pea-sized brain around it.
+Decided to make my own option handling just to see how hard it would be. It isnt as functional as `getopt()` but my program is pretty small and has like barely any commands
+so i think this should be fine!
 
+- tried reading open source code could barely understand but this just motivates me more, one day I'd be able to actually read Open Source code and really understand!
+
+- very important I learned that `*argv[x]` (or any double pointer really) does not "derefence first, index into second", but rather it "dereferences twice", so instead of
+"dereference the pointer and look at the next memory address the pointer points to" it does "get the \[x\]-th pointer and dereference it". The intended behaviour was to
+dereference the pointer to a pointer, and index into the pointer's memory array.
+
+> (*argv)\[1], "(*argv)" occurs first before indexing, "\[1]" occurs.
+
+- What ended up happening was just dereferencing into the \[x\]-th pointer, and dereferencing that pointer to it's first memory location.
+
+> *argv[1], "argv[1]" occurs first, effectively dereferencing the pointer to a pointer, then "*argv" occurs, further dereferencing into the first memory location.
+
+- This basically happens because indexing into an array takes precedence over dereferencing a pointer.
+"
