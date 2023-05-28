@@ -43,5 +43,7 @@ dereference the pointer to a pointer, and index into the pointer's memory array.
 
 > *argv[1], "argv[1]" occurs first, effectively dereferencing the pointer to a pointer, then "*argv" occurs, further dereferencing into the first memory location.
 
-- This basically happens because indexing into an array takes precedence over dereferencing a pointer.
+- This second behaviour results in reading a `char` datatype representing the first memory location of the char *array, which is not what we want!
+
+- This basically happens because indexing into an pointer using array takes precedence over dereferencing a pointer.
 "
