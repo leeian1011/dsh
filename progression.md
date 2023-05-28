@@ -21,10 +21,15 @@ int append(list *dasher){
 }
 ```
 2. Option handlings, to be honest I took some inspiration from tmux's open source code. I find out that theres this little helpful POSIX library called getopt.h,
-I had some use with it in CS50 but didnt really cross my mind. I tried reading the [openBSD](https://github.com/openbsd/src/blob/master/lib/libc/stdlib/getopt_long.c)
-and the [GNU](https://github.com/gcc-mirror/gcc/blob/master/libiberty/getopt.c) versions of `getopt()` and I just cannot wrap my pea-sized brain around it.
-Decided to make my own option handling just to see how hard it would be. It isnt as functional as `getopt()` but my program is pretty small and has like barely any commands
-so i think this should be fine!
+I had used it in CS50 but it didnt really cross my mind. I tried reading the [openBSD](https://github.com/openbsd/src/blob/master/lib/libc/stdlib/getopt_long.c)
+and the [GNU](https://github.com/gcc-mirror/gcc/blob/master/libiberty/getopt.c) versions of `getopt()` and I just cannot wrap my pea-sized brain around the code I was reading..
+Ultimately decided to make my own option handling just to see how hard it would be to parse argvs, using `getopt()` could've saved me time but I can barely understand the inner
+workings on it, and I just really really wanted to make everything from scratch to learn!
+
+> ignore the fact that i use the <string.h> library everywhere despite claiming I want to make everything from scratch
+
+The function or library(? I'm not sure what to call it), isnt as functional as `getopt()` but my program is pretty small and has like barely any commands
+the intended behaviour is displayed and thats all well! (Until it isn't)
 
 - tried reading open source code could barely understand but this just motivates me more, one day I'd be able to actually read Open Source code and really understand!
 
