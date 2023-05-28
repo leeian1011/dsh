@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_LANES 5
+#define MAX_LANES 4
 #define MAX_COMMANDS 4
 #define KILOBYTE 1024
 

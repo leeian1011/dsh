@@ -27,7 +27,7 @@ bool grab_lane(list **dasher){
 
 
 bool save_lanes(list *dasher){
-    FILE *persistentDir = fopen("cache/lanes.txt", "w");
+    FILE *persistentDir = fopen(".cache/lanes.txt", "w");
     if(persistentDir == NULL){
         fclose(persistentDir);
         return (false);

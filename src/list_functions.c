@@ -1,9 +1,7 @@
 #include "dsh.h"
 
 static bool is_empty(list *dasher){
-    if(dasher == NULL){
-        return (true);
-    }
+    if(dasher == NULL) {return (true);}
 
     return (false);
 }
@@ -19,9 +17,7 @@ static void create_lane(list *newLane, int position, char *lane){
 char *lane_at(list *dasher, int index){
     list *iterator = dasher;
     while(iterator->position != index){
-        if(iterator->next == NULL){
-            return (NULL);
-        }
+        if(iterator->next == NULL) {return (NULL);}
         iterator = iterator->next;
     }
 
@@ -32,13 +28,11 @@ char *lane_at(list *dasher, int index){
 bool append(list **dasher, char *lane){
     list *iterator = *dasher;
     list *newLane = malloc(sizeof(list));
-    if(newLane == NULL){
-        return (false);
-    }    
+    if(newLane == NULL) {return (false);}
+
     newLane->lane = malloc(strlen(lane) + 1);
-    if(newLane->lane == NULL){
-        return (false);
-    }
+    if(newLane->lane == NULL) {return(false);}
+
     if(*dasher == NULL){
         create_lane(newLane, 0, lane);
         *dasher = newLane;
@@ -48,7 +42,8 @@ bool append(list **dasher, char *lane){
     while(iterator->next != NULL){
         iterator = iterator->next;
     }
-    
+    if(iterator->position + 1 > MAX_LANES) {return (false);}
+
     create_lane(newLane, (iterator->position + 1), lane);
     iterator->next = newLane;
     return (true);
@@ -57,10 +52,10 @@ bool append(list **dasher, char *lane){
 
 void print_list(list *dasher){
     list *iterator = dasher;
-    if(is_empty(dasher)){
-        fprintf(stderr, "No lanes has been set\nUse:\n\tdsh -a\tto add current working directory to a dash-able lane\n");
-    }
+    if(is_empty(dasher)) {fprintf(stderr, "No lanes have been set\n");}
+
     while(iterator != NULL){
-        printf("%d : %s\n", iterator->position, iterator->lane);
+        printf("%d: %s\n", iterator->position, iterator->lane);
+        iterator = iterator->next;
     }
 }

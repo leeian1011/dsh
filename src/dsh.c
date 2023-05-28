@@ -5,7 +5,9 @@ int main(int argc, char **argv){
         printf("Usage: %s [-a | --add]\n", argv[0]);
         return (-1);
     }
-    
+    list *dasher = NULL;
+    load_lanes(&dasher);
+
     char c = get_option(argc, argv);
     switch(c) {
         case 0:
@@ -15,7 +17,13 @@ int main(int argc, char **argv){
             printf("rm works i guess\n");
             break;
         case 2:
-            printf("list called\n");
+            append(&dasher, "test");
+            append(&dasher, "test2");
+            append(&dasher, "test3");
+            append(&dasher, "test4");
+            append(&dasher, "test5");
+            append(&dasher, "test6");
+            print_list(dasher);
             break;
         case 3:
             printf("help called\n");
