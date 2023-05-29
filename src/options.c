@@ -35,8 +35,14 @@ char get_option(int argc, char **argv){
     
                 
 void closest_option(char option){
-    fprintf(stderr, "The most similar command is\n");
+    bool closestOptionPresent = 1;
     for(int i = 0; i < MAX_COMMANDS; i++){
-        if(strchr(COMMANDS[i], option) != NULL) {fprintf(stderr, "\t%s\n", COMMANDS[i]);}
+        if(strchr(COMMANDS[i], option) != NULL){
+            if(closestOptionPresent == 1){
+                fprintf(stderr, "The closest command is\n");
+                closestOptionPresent = 0;
+            }
+            fprintf(stderr, "\t%s\n", COMMANDS[i]);
+        }
     }
 }

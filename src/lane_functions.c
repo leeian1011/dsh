@@ -49,7 +49,7 @@ bool load_lanes(list **dasher){
     int laneIndex = 0;
     int laneByteCount = 0;
 
-    FILE *persistentDir = fopen("cache/lanes.txt", "r");
+    FILE *persistentDir = fopen(".cache/lanes.txt", "r");
     if(persistentDir == NULL){
         fclose(persistentDir);
         return (false);
@@ -82,3 +82,28 @@ bool load_lanes(list **dasher){
     return (true); 
     
 }
+
+
+void free_lanes(list *dasher){
+    list *iterator = dasher;
+    list *previous = NULL;
+
+    while(iterator != NULL){
+        previous = iterator;
+        iterator = iterator->next;
+        free(previous->lane);
+        free(previous);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
