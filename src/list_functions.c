@@ -7,7 +7,7 @@ static bool is_empty(list *dasher){
 }
 
 
-static void create_lane(list *newLane, int position, char *lane){
+void create_lane(list *newLane, int position, char *lane){
     newLane->position = position;
     strcpy(newLane->lane, lane);
     newLane->next = NULL;
@@ -25,27 +25,26 @@ char *lane_at(list *dasher, int index){
 }
 
 
-bool append(list **dasher, char *lane){
+bool append(list **dasher, list **newLane){
+    printf("reaches here\n");
     list *iterator = *dasher;
-    list *newLane = malloc(sizeof(list));
-    if(newLane == NULL) {return (false);}
-
-    newLane->lane = malloc(strlen(lane) + 1);
-    if(newLane->lane == NULL) {return(false);}
-
     if(*dasher == NULL){
-        create_lane(newLane, 0, lane);
-        *dasher = newLane;
+        *dasher = *newLane;
         return (true);
     }
-    
+
     while(iterator->next != NULL){
         iterator = iterator->next;
     }
-    if(iterator->position + 1 > MAX_LANES) {return (false);}
 
-    create_lane(newLane, (iterator->position + 1), lane);
-    iterator->next = newLane;
+    if((iterator->position + 1) == MAX_LANES){
+        fprintf(stderr, "lanes are full\n");
+        free(newLane[0]->lane);
+        free(newLane);
+        return (false);
+    }
+
+    iterator->next = *newLane;
     return (true);
 }
 
@@ -59,3 +58,31 @@ void print_list(list *dasher){
         iterator = iterator->next;
     }
 }
+
+
+void remove_at(list *dasher, int position){
+    list *iterator = dasher;
+    list *prev = NULL;
+    while(iterator->position != position){
+        prev = iterator;
+        iterator = iterator->next;
+    }
+
+    prev->next = iterator->next;
+    free(iterator->lane);
+    free(iterator);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

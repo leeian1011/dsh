@@ -1,7 +1,8 @@
 #include "dsh.h"
 
 int main(int argc, char **argv){
-    if(argc <= 1){
+    if(argc == 1){
+        printf("Usage: dsh [a] [rm] [h] [ls]\n");
         return (-1);
     }
     list *dasher = NULL;
@@ -9,17 +10,19 @@ int main(int argc, char **argv){
         fprintf(stderr, "dsh: error loading lanes\n");
         return (-1);
     }
-
+    printf("loaded sucessfully\n");
     char c = get_option(argc, argv);
     switch(c) {
         case 0:
             add_command(&dasher);  
             break;
         case 1:
-            printf("rm works i guess\n");
+            remove_at(dasher, 0);
+            save_lanes(dasher);
             break;
         case 2:
             print_list(dasher);
+            free_lanes(dasher);
             break;
         case 3:
             printf("help called\n");
