@@ -26,7 +26,6 @@ char *lane_at(list *dasher, int index){
 
 
 bool append(list **dasher, list **newLane){
-    printf("reaches here\n");
     list *iterator = *dasher;
     if(*dasher == NULL){
         *dasher = *newLane;
@@ -37,12 +36,6 @@ bool append(list **dasher, list **newLane){
         iterator = iterator->next;
     }
 
-    if((iterator->position + 1) == MAX_LANES){
-        fprintf(stderr, "lanes are full\n");
-        free(newLane[0]->lane);
-        free(newLane);
-        return (false);
-    }
 
     iterator->next = *newLane;
     return (true);

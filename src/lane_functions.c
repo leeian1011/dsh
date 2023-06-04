@@ -13,6 +13,7 @@ static bool is_empty(FILE *persistentDir){
 }
 
 
+
 /*bool grab_lane(list **dasher){
     char directory[KILOBYTE]; 
     FILE *currentDirectory = popen("pwd", "r"); 
@@ -60,7 +61,6 @@ bool load_lanes(list **dasher){
     int newLineCount = 0;
     int positions[MAX_LANES];
     char laneBuffer[MAX_LANES][KILOBYTE];
-    list *newLane[MAX_LANES];
 
     FILE *persistentDir = fopen(".cache/lanes.txt", "r");
     if(persistentDir == NULL){
@@ -72,7 +72,7 @@ bool load_lanes(list **dasher){
         fclose(persistentDir);
         return (true);
     }
-    printf("passes empt check\n");
+    
     while((c = fgetc(persistentDir)) != EOF){
         if(newLineCount % 2 == 0){
             if(c == '\n') {
@@ -93,9 +93,8 @@ bool load_lanes(list **dasher){
             laneByteCount++;
         }
     }
-
-    printf("passes whil c loop\n");
-    for(int i = 0; i < laneIndex; i++){
+ list *newLane[laneIndex];
+     for(int i = 0; i < laneIndex; i++){
         newLane[i] = malloc(sizeof(list));
         if(newLane[i] == NULL){
             for(int j = 0; j < i; j ++){
@@ -104,6 +103,7 @@ bool load_lanes(list **dasher){
             free(newLane[i]);
             return (false);
         }
+
         newLane[i]->lane = malloc(strlen(laneBuffer[i]) + 1);
         if(newLane[i]->lane == NULL){
             for(int j = 0; j < i; j++){
@@ -115,13 +115,10 @@ bool load_lanes(list **dasher){
             return(false);
         }
     }
-printf("survive allocation\n");
 
     for(int i = 0; i < laneIndex; i++){
         create_lane(newLane[i], positions[i], laneBuffer[i]);
-        printf("%s\n%d\n", newLane[i]->lane, newLane[i]->position);
         append(&(*dasher), &newLane[i]);
-        printf("loading : dasher = %s", dasher[0]->lane);
     }
          
     
