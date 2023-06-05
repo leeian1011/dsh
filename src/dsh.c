@@ -10,14 +10,16 @@ int main(int argc, char **argv){
         fprintf(stderr, "dsh: error loading lanes\n");
         return (-1);
     }
-    printf("loaded sucessfully\n");
     char c = get_option(argc, argv);
     switch(c) {
         case 0:
             add_command(&dasher);  
             break;
         case 1:
-            remove_at(dasher, 0);
+            if(argc != 3){
+                fprintf(stderr, "Usage: dsh rm [lane index]\n");
+                return(-1);
+            }
             save_lanes(dasher);
             break;
         case 2:
@@ -27,14 +29,21 @@ int main(int argc, char **argv){
         case 3:
             printf("help called\n");
             break;
+        case 4:
+            printf("moving called\n");
+            break;
+        case 5:
+            printf("sort called\n");
+            break;
         case 'g':
+            printf("go called\n");
             if(argc > 2){
                 fprintf(stderr, "Usage: dsh [lane index]\n");
                 return (-1);
             }
 
-            if(atoi(*++argv) > MAX_LANES){
-                fprintf(stderr, "dsh: Index %s does not exist\nMax number of lanes: 0-%d\n", *argv, MAX_LANES);
+            if(atoi(*++argv) >= MAX_LANES){
+                fprintf(stderr, "dsh: Index %s does not exist\nMax number of lanes: 0-%d\n", *argv, MAX_LANES - 1);
                 return (-1);
             }
             break;        

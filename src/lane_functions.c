@@ -13,7 +13,20 @@ static bool is_empty(FILE *persistentDir){
 }
 
 
+char *set_directory(){
+    char *directory = malloc(KILOBYTE);
+    FILE *currentDirectory = popen("pwd", "r");
+    if(currentDirectory == NULL){
+        pclose(currentDirectory);
+        return (NULL);
+    }
 
+    fread(directory, sizeof(char), KILOBYTE, currentDirectory);
+    pclose(currentDirectory);
+    
+    directory[strlen(directory) - 1] = '\0';
+    return directory;
+}
 /*bool grab_lane(list **dasher){
     char directory[KILOBYTE]; 
     FILE *currentDirectory = popen("pwd", "r"); 
@@ -93,7 +106,8 @@ bool load_lanes(list **dasher){
             laneByteCount++;
         }
     }
- list *newLane[laneIndex];
+
+     list *newLane[laneIndex];
      for(int i = 0; i < laneIndex; i++){
         newLane[i] = malloc(sizeof(list));
         if(newLane[i] == NULL){
@@ -121,7 +135,6 @@ bool load_lanes(list **dasher){
         append(&(*dasher), &newLane[i]);
     }
          
-    
     fclose(persistentDir);
     return (true); 
     

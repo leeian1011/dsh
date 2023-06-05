@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_LANES 5
-#define MAX_COMMANDS 4
+#define MAX_LANES 5 
+#define MAX_COMMANDS 6
 #define KILOBYTE 1024
 
 typedef struct list{
@@ -18,15 +18,16 @@ list;
 
 
 /* lane_functions.c  */
-bool load_lanes(list **dasher);
-bool grab_lane(list **dasher);
+char *set_directory();
 bool save_lanes(list *dasher);
 void free_lanes(list *dasher);
+bool load_lanes(list **dasher);
 
 /* list_functions.c */
+int lowest_position(list *dasher);
 void create_lane(list *newLane, int position, char *lane);
 char *lane_at(list *dasher, int index);
-bool append(list **dasher, list **newLane);
+void append(list **dasher, list **newLane);
 void remove_at(list *dasher, int position);
 void print_list(list *dasher);
 

@@ -1,7 +1,7 @@
 #include "dsh.h"
 #include <ctype.h>
 
-static const char *COMMANDS[MAX_COMMANDS] = {"a", "rm", "ls", "h"};
+static const char *COMMANDS[MAX_COMMANDS] = {"a", "rm", "ls", "h", "mv", "sort"};
 
 static bool check_option_digit(char **argv){
     int optionLength = strlen(*++argv);

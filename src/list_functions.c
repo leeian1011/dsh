@@ -6,6 +6,22 @@ static bool is_empty(list *dasher){
     return (false);
 }
 
+int lowest_position(list *dasher){
+    list *iterator = dasher;
+    int positionCount = 0;
+    if(is_empty(dasher)){ return positionCount;}
+    while(1){
+       if(positionCount >= MAX_LANES) {return -1;}
+       if(iterator->position == positionCount){
+         iterator = dasher;
+         positionCount++;
+        }else{
+            iterator = iterator->next;
+            if(iterator == NULL) {return positionCount;}
+        }
+    }
+}
+
 
 void create_lane(list *newLane, int position, char *lane){
     newLane->position = position;
@@ -25,20 +41,19 @@ char *lane_at(list *dasher, int index){
 }
 
 
-bool append(list **dasher, list **newLane){
+void append(list **dasher, list **newLane){
     list *iterator = *dasher;
     if(*dasher == NULL){
-        *dasher = *newLane;
-        return (true);
+        dasher[0] = *newLane;
+        return;
     }
 
     while(iterator->next != NULL){
         iterator = iterator->next;
     }
 
-
     iterator->next = *newLane;
-    return (true);
+    return;
 }
 
 
