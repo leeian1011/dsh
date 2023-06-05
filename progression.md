@@ -46,4 +46,33 @@ dereference the pointer to a pointer, and index into the pointer's memory array.
 - This second behaviour results in reading a `char` datatype representing the first memory location of the char *array, which is not what we want!
 
 - This basically happens because indexing into an pointer using array takes precedence over dereferencing a pointer.
-"
+
+3. Add commands, Minor issues here, quickly realized that the previous way of handling of "adding a lane" was to pipe the output of pwd and immediately use `append()`.
+This meant that the position of the lane would be assigned when appending, this makes it impossible to assign a missing index.
+
+> An example of the issue
+
+```C
+int append(list *dasher, char *directory){
+    list *newLane = malloc(sizeof(list));
+    ...
+    list *iterator = dasher;
+    ...
+    newLane->position = iterator->position + 1;
+
+    ...
+}
+```
+The code above means that the appended newLane would always have a position of > 1. If there were existing lanes, 4, 2 , 0, 1. It would append lane 5 rather than lane 3.
+
+- Ended up refactoring append to accept the address of a list to be appended, `append(list **dasher, list **newLane)` and assign newLane in the `add_command(list **dasher)`.
+
+- Set restriction where iF `MAX_LANES` number of lanes have been set it would not add a new lane.
+
+4. Removal and Sorting.
+
+
+
+
+
+

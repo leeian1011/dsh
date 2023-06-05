@@ -6,3 +6,5 @@ figmak
 conek
 0
 /Users/open/Documents/Programming/dash
+3
+/Users/open/Documents/Programming/dash
