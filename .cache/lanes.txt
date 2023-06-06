@@ -1,10 +1,6 @@
-4
-fjdksa
-2
-figmak
-1
-conek
 0
 /Users/open/Documents/Programming/dash
-3
+1
+/Users/open/Documents/Programming/dash
+2
 /Users/open/Documents/Programming/dash

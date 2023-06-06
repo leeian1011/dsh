@@ -24,15 +24,16 @@ void free_lanes(list *dasher);
 bool load_lanes(list **dasher);
 
 /* list_functions.c */
+bool list_empty(list *dasher);
 int lowest_position(list *dasher);
 void create_lane(list *newLane, int position, char *lane);
 char *lane_at(list *dasher, int index);
 void append(list **dasher, list **newLane);
 void remove_at(list *dasher, int position);
-void print_list(list *dasher);
 
 /* command_functions.c */
 void add_command(list **dasher);
+void list_command(list *dasher);
 
 /* options.c */
 char get_option(int argc, char **argv);

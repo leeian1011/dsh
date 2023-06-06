@@ -1,5 +1,22 @@
 #include "dsh.h"
 
+bool argc_check(int argc, int reqOptionCount, char command){
+    if(argc != reqOptionCount){
+        switch(command){
+            case 'a':
+                fprintf(stderr, "Usage: dsh a\n");
+                break;
+            case 'd':
+                fprintf(stderr, "Usage: dsh rm [lane index]\n");
+                break;
+            default:
+                return false;
+        }
+        return false;
+    }
+    return true;
+}
+
 int main(int argc, char **argv){
     if(argc == 1){
         printf("Usage: dsh [a] [rm] [h] [ls]\n");
@@ -13,6 +30,7 @@ int main(int argc, char **argv){
     char c = get_option(argc, argv);
     switch(c) {
         case 0:
+            if(!argc_check(argc, 2, 'a')) { return (-1);}
             add_command(&dasher);  
             break;
         case 1:
@@ -23,8 +41,7 @@ int main(int argc, char **argv){
             save_lanes(dasher);
             break;
         case 2:
-            print_list(dasher);
-            free_lanes(dasher);
+            list_command(dasher);
             break;
         case 3:
             printf("help called\n");

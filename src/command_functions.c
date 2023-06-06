@@ -48,3 +48,15 @@ void add_command(list **dasher){
 }
 
 
+
+void list_command(list *dasher){
+    list *iterator = dasher;
+    if(list_empty(dasher)) {fprintf(stderr, "No lanes have been set\n");}
+
+    while(iterator != NULL){
+        printf("%d: %s\n", iterator->position, iterator->lane);
+        iterator = iterator->next;
+    }
+
+    free_lanes(dasher);
+}

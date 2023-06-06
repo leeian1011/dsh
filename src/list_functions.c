@@ -1,6 +1,6 @@
 #include "dsh.h"
 
-static bool is_empty(list *dasher){
+bool list_empty(list *dasher){
     if(dasher == NULL) {return (true);}
 
     return (false);
@@ -9,7 +9,7 @@ static bool is_empty(list *dasher){
 int lowest_position(list *dasher){
     list *iterator = dasher;
     int positionCount = 0;
-    if(is_empty(dasher)){ return positionCount;}
+    if(list_empty(dasher)){ return positionCount;}
     while(1){
        if(positionCount >= MAX_LANES) {return -1;}
        if(iterator->position == positionCount){
@@ -57,15 +57,6 @@ void append(list **dasher, list **newLane){
 }
 
 
-void print_list(list *dasher){
-    list *iterator = dasher;
-    if(is_empty(dasher)) {fprintf(stderr, "No lanes have been set\n");}
-
-    while(iterator != NULL){
-        printf("%d: %s\n", iterator->position, iterator->lane);
-        iterator = iterator->next;
-    }
-}
 
 
 void remove_at(list *dasher, int position){
