@@ -22,6 +22,7 @@ int main(int argc, char **argv){
         printf("Usage: dsh [a] [rm] [h] [ls]\n");
         return (-1);
     }
+    char commandIdentifier[] = {'a', 'd'};
     list *dasher = NULL;
     if(!load_lanes(&dasher)) {
         fprintf(stderr, "dsh: error loading lanes\n");
@@ -30,15 +31,12 @@ int main(int argc, char **argv){
     char c = get_option(argc, argv);
     switch(c) {
         case 0:
-            if(!argc_check(argc, 2, 'a')) { return (-1);}
+            if(!argc_check(argc, 2, commandIdentifier[0])) { return (-1);}
             add_command(&dasher);  
             break;
         case 1:
-            if(argc != 3){
-                fprintf(stderr, "Usage: dsh rm [lane index]\n");
-                return(-1);
-            }
-            save_lanes(dasher);
+            if(!argc_check(argc, 3, commandIdentifier[1])) { return (-1);}
+            remove_command(dasher, argv[2]);
             break;
         case 2:
             list_command(dasher);

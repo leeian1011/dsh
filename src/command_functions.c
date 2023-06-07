@@ -35,7 +35,6 @@ void add_command(list **dasher){
     }
 
     create_lane(newLane, newPosition, newDirectory);
-    printf("lane in add command:\n%s\n%d\n",newLane->lane, newLane->position);
     append(&(*dasher), &newLane); 
 
     if(!save_lanes(*dasher)){
@@ -44,10 +43,44 @@ void add_command(list **dasher){
         return;
     }
     
+    free(newDirectory);
     free_lanes(*dasher);
 }
 
+void remove_command(list *dasher, char *argv){
+    int removePosition = (int) argv[0] - '0';
+    list *iterator = dasher;
+    if(list_empty(iterator)){
+        fprintf(stderr, "dsh: no lanes have been set check `dsh h`\n");
+        free_lanes(dasher);
+        return;
+    }
+    list *prev = NULL;
 
+    while(iterator != NULL){
+        if(iterator->position == removePosition && dasher->position == removePosition){
+            dasher = iterator->next;
+            break;
+        }else if(iterator->position == removePosition){
+            prev->next = iterator->next;
+            break;
+        }else{
+            prev = iterator;
+            iterator = iterator->next;
+        }
+    }
+    if(list_empty(iterator)){
+        fprintf(stderr, "dsh: lane position '%s' does not exist\n", argv);
+        free_lanes(dasher);
+        return;
+    }
+
+    free(iterator->lane);
+    free(iterator);
+
+    save_lanes(dasher);
+    free_lanes(dasher);
+}
 
 void list_command(list *dasher){
     list *iterator = dasher;

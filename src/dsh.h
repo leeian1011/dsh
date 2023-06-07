@@ -33,6 +33,7 @@ void remove_at(list *dasher, int position);
 
 /* command_functions.c */
 void add_command(list **dasher);
+void remove_command(list *dasher, char *argv);
 void list_command(list *dasher);
 
 /* options.c */
