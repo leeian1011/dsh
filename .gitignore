@@ -1,4 +1,3 @@
 *.o
 .DS_Store
-.cache/*
 dsh
