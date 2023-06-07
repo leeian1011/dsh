@@ -16,6 +16,13 @@ void add_command(list **dasher){
         free_lanes(*dasher);
         return;
     }
+    
+    if(!check_duplicate(*dasher, newDirectory)){
+        fprintf(stderr, "dsh: %s already saved\n", newDirectory);
+        free(newDirectory);
+        free_lanes(*dasher);
+        return;
+    }
 
     list *newLane = malloc(sizeof(list));
     if(newLane == NULL){

@@ -12,7 +12,6 @@ static bool is_empty(FILE *persistentDir){
     return true;
 }
 
-
 char *set_directory(){
     char *directory = malloc(KILOBYTE);
     FILE *currentDirectory = popen("pwd", "r");
@@ -27,28 +26,9 @@ char *set_directory(){
     directory[strlen(directory) - 1] = '\0';
     return directory;
 }
-/*bool grab_lane(list **dasher){
-    char directory[KILOBYTE]; 
-    FILE *currentDirectory = popen("pwd", "r"); 
-    if(currentDirectory == NULL){
-        pclose(currentDirectory);
-        return (false);
-    }
-
-    fread(directory, sizeof(char), KILOBYTE, currentDirectory); 
-    directory[strlen(directory) - 1] = '\0'; 
-    if(!append(&(*dasher),)){
-        fprintf(stderr, "Maximum number of lanes have been saved\n");
-        return (false);
-    }
-    ;
-    pclose(currentDirectory);
-    return (true);
-}*/
-
 
 bool save_lanes(list *dasher){
-    FILE *persistentDir = fopen(".cache/lanes.txt", "w");
+    FILE *persistentDir = fopen("cache/lanes.txt", "w");
     if(persistentDir == NULL){
         fclose(persistentDir);
         return (false);
@@ -65,7 +45,6 @@ bool save_lanes(list *dasher){
    return (true);
 }
 
-
 bool load_lanes(list **dasher){
     char c;
     int laneIndex = 0;
@@ -75,7 +54,7 @@ bool load_lanes(list **dasher){
     int positions[MAX_LANES];
     char laneBuffer[MAX_LANES][KILOBYTE];
 
-    FILE *persistentDir = fopen(".cache/lanes.txt", "r");
+    FILE *persistentDir = fopen("cache/lanes.txt", "r");
     if(persistentDir == NULL){
         fclose(persistentDir);
         return (false);
@@ -140,7 +119,6 @@ bool load_lanes(list **dasher){
     
 }
 
-
 void free_lanes(list *dasher){
     list *iterator = dasher;
     list *previous = NULL;
@@ -153,14 +131,13 @@ void free_lanes(list *dasher){
     }
 }
 
+bool check_duplicate(list *dasher, char *directory){
+    list *iterator = dasher;
+    while(iterator != NULL){
+        if(strcmp(iterator->lane, directory) == 0) {return(false);}
+        iterator = iterator->next;
+    }
 
-
-
-
-
-
-
-
-
-
+    return (true);
+}
 

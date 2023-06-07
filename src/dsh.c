@@ -9,6 +9,9 @@ bool argc_check(int argc, int reqOptionCount, char command){
             case 'd':
                 fprintf(stderr, "Usage: dsh rm [lane index]\n");
                 break;
+            case 'g':
+                fprintf(stderr, "Usage: dsh [lane index]\n");
+                break;
             default:
                 return false;
         }
@@ -19,10 +22,10 @@ bool argc_check(int argc, int reqOptionCount, char command){
 
 int main(int argc, char **argv){
     if(argc == 1){
-        printf("Usage: dsh [a] [rm] [h] [ls]\n");
+        printf("Usage: dsh [a] [rm] [h] [ls] [lane index]\n");
         return (-1);
     }
-    char commandIdentifier[] = {'a', 'd'};
+    char commandIdentifier[] = {'a', 'd', 'g'};
     list *dasher = NULL;
     if(!load_lanes(&dasher)) {
         fprintf(stderr, "dsh: error loading lanes\n");

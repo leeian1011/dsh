@@ -22,6 +22,7 @@ char *set_directory();
 bool save_lanes(list *dasher);
 void free_lanes(list *dasher);
 bool load_lanes(list **dasher);
+bool check_duplicate(list *dasher, char *directory);
 
 /* list_functions.c */
 bool list_empty(list *dasher);
