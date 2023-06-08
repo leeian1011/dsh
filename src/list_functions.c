@@ -43,7 +43,7 @@ char *lane_at(list *dasher, int index){
 
 void append(list **dasher, list **newLane){
     list *iterator = *dasher;
-    if(*dasher == NULL){
+    if(list_empty(*dasher)){
         dasher[0] = *newLane;
         return;
     }

@@ -12,11 +12,29 @@ static bool is_empty(FILE *persistentDir){
     return true;
 }
 
+char *cache(){
+    char *directory = malloc(KILOBYTE);
+    FILE *test = popen("echo $TEST", "r");
+    if(test == NULL){
+        pclose(test);
+        free(directory);
+        return (NULL);
+    }
+    
+    fread(directory, sizeof(char), KILOBYTE, test);
+    pclose(test);
+
+    directory[strlen(directory) - 1] = '\0';
+
+    return directory;
+}
+
 char *set_directory(){
     char *directory = malloc(KILOBYTE);
     FILE *currentDirectory = popen("pwd", "r");
     if(currentDirectory == NULL){
         pclose(currentDirectory);
+        free(directory);
         return (NULL);
     }
 
@@ -28,7 +46,7 @@ char *set_directory(){
 }
 
 bool save_lanes(list *dasher){
-    FILE *persistentDir = fopen("cache/lanes.txt", "w");
+    FILE *persistentDir = fopen(cache(), "w");
     if(persistentDir == NULL){
         fclose(persistentDir);
         return (false);
@@ -54,7 +72,7 @@ bool load_lanes(list **dasher){
     int positions[MAX_LANES];
     char laneBuffer[MAX_LANES][KILOBYTE];
 
-    FILE *persistentDir = fopen("cache/lanes.txt", "r");
+    FILE *persistentDir = fopen(cache(), "r");
     if(persistentDir == NULL){
         fclose(persistentDir);
         return (false);

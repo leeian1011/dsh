@@ -6,7 +6,7 @@ all: ${directory}dsh
 
 ${directory}dsh: ${directory}dsh.c
 	clang -c ${directory}lane_functions.c ${directory}list_functions.c ${directory}options.c ${directory}command_functions.c
-	clang -Wall -Wextra -o dsh ${directory}dsh.c lane_functions.o list_functions.o options.o command_functions.o
+	clang -Wall -Wextra -o dasher ${directory}dsh.c lane_functions.o list_functions.o options.o command_functions.o
 
 dsh_test:
 	clang -c ${directory}lane_functions.c ${directory}list_functions.c ${directory}options.c ${directory}command_functions.c

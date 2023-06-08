@@ -69,10 +69,24 @@ The code above means that the appended newLane would always have a position of >
 
 - Set restriction where iF `MAX_LANES` number of lanes have been set it would not add a new lane.
 
-4. Removal and Sorting.
+4. TINY BRAIN MOMENT
 
+**SO** my peanut sized brain just spent half an hour trying to figure out how to get dsh to execute and change the directory of the current parent shell. I went down a
+minor rabbit hole and learned a whole bunch about how the shell actually works.
 
+- Its a program that lets use interface with the kernel of the OS.
 
+This is where I learned about a tiny little thing that somehow never came to me. SUBPROCESSES OR CHILD SHELL.
+Everytime I run dsh from the command line or if I had dsh included in the environment PATH variable, the parent shell creates a subprocess, which contains it's own environment.
+This meant that everytime I call dsh, I cant force change the current directory in the parent shell. The same applies to shell scripts.
 
+> A temporary workaround to this was just literally typing `cd $(dsh x)`, where x is the lane position, and also modifying dsh to simply print to stdout, the directory saved.
+
+This isnt a very elegant fix, there are many issues with it, whereby, if position x does not exist, cd would change the directory to the home directory.
+
+- Learned about shell function, that lets commands be ran in the current instance of the shell but can only be declared in the rc file.
+
+- Learned quite a lot about how shells work and a lot more about pipe and file descriptors, like how printing to the subshell's stdout prints to the parent shell's stdout because
+the subshell has the exact same file descriptor.
 
 

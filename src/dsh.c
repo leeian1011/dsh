@@ -23,23 +23,23 @@ bool argc_check(int argc, int reqOptionCount, char command){
 int main(int argc, char **argv){
     if(argc == 1){
         printf("Usage: dsh [a] [rm] [h] [ls] [lane index]\n");
-        return (-1);
+        exit(-1);
     }
     char commandIdentifier[] = {'a', 'd', 'g'};
     list *dasher = NULL;
     if(!load_lanes(&dasher)) {
         fprintf(stderr, "dsh: error loading lanes\n");
-        return (-1);
+        exit(-1);
     }
     char c = get_option(argc, argv);
     switch(c) {
         case 0:
-            if(!argc_check(argc, 2, commandIdentifier[0])) { return (-1);}
-            add_command(&dasher);  
+            if(!argc_check(argc, 2, commandIdentifier[0])) { exit(-1);}
+            if(add_command(&dasher) == -1) {exit(-1);}  
             break;
         case 1:
-            if(!argc_check(argc, 3, commandIdentifier[1])) { return (-1);}
-            remove_command(dasher, argv[2]);
+            if(!argc_check(argc, 3, commandIdentifier[1])) { exit(-1);}
+            if(remove_command(dasher, argv[2]) == -1) {exit(-1);}
             break;
         case 2:
             list_command(dasher);
@@ -54,22 +54,13 @@ int main(int argc, char **argv){
             printf("sort called\n");
             break;
         case 'g':
-            printf("go called\n");
-            if(argc > 2){
-                fprintf(stderr, "Usage: dsh [lane index]\n");
-                return (-1);
-            }
-
-            if(atoi(*++argv) >= MAX_LANES){
-                fprintf(stderr, "dsh: Index %s does not exist\nMax number of lanes: 0-%d\n", *argv, MAX_LANES - 1);
-                return (-1);
-            }
+            if(!argc_check(argc, 2, commandIdentifier[2])) {exit(-1);}
+            if(dash_command(dasher, argv[1]) == -1) {exit(-1);}
             break;        
         default :
             fprintf(stderr, "dsh: '%s' is not a valid command, use 'dsh h' for help.\n", argv[1]);
             closest_option(argv[1][0]);
             return(-1);
     }
-     
     return 0;
 }
