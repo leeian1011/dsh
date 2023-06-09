@@ -21,10 +21,15 @@ To run the program you'll need to export the directory path to the PATH environm
 > Copy paste this into your terminal rc file & include directory to $PATH variable!
 
 ```bash
+export DASH_CACHE="**_path/to_**/dash/cache/lanes.txt"
+export PATH="$PATH:**_path/to_**/dash"
+
 dsh(){
     operate=$1
     position=$2
-    if [[ $operate -lt 5 ]]; then
+    nextposition=$3
+
+    if [[ $operate < 5 ]]; then
         directory=$(dasher $operate)
         if [[ $? == 0 ]]; then
             cd $directory
@@ -32,9 +37,10 @@ dsh(){
     elif [[ $# -eq 0 ]]; then
         dasher
     else
-        dasher $operate $position
+        dasher $operate $position $nextposition
     fi
 }
+
 ```
 
 Hopefully I'll learn how to make install scripts soon :D
