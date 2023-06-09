@@ -12,6 +12,9 @@ bool argc_check(int argc, int reqOptionCount, char command){
             case 'g':
                 fprintf(stderr, "Usage: dsh [lane index]\n");
                 break;
+            case 'm':
+                fprintf(stderr, "Usage: dsh mv [oldPosition] [newPosition]\n");
+                break;
             default:
                 return false;
         }
@@ -25,7 +28,7 @@ int main(int argc, char **argv){
         fprintf(stderr, "Usage: dsh [a] [rm] [ls] [lane index]\n\t   [mv] [h] [sort]\n");
         exit(-1);
     }
-    char commandIdentifier[] = {'a', 'd', 'g'};
+    char commandIdentifier[] = {'a', 'd', 'g', 'm'};
     list *dasher = NULL;
     if(!load_lanes(&dasher)) {
         fprintf(stderr, "dsh: error loading lanes\n");
@@ -45,10 +48,12 @@ int main(int argc, char **argv){
             list_command(dasher);
             break;
         case 3:
-            printf("help called\n");
+            help_command();
+            free_lanes(dasher);
             break;
         case 4:
-            printf("moving called\n");
+            if(!argc_check(argc, 4, commandIdentifier[3])) {exit(-1);}
+            move_command(dasher, argv);
             break;
         case 5:
             printf("sort called\n");

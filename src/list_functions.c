@@ -57,8 +57,6 @@ void append(list **dasher, list **newLane){
 }
 
 
-
-
 void remove_at(list *dasher, int position){
     list *iterator = dasher;
     list *prev = NULL;
@@ -73,9 +71,23 @@ void remove_at(list *dasher, int position){
 }
 
 
+void move(list *dasher, int newPosition, int oldPosition){
+    list *iterator = dasher;
+    
+    while(iterator != NULL){
+        if(iterator->position == newPosition){
+            iterator->position = oldPosition;
+            iterator = iterator->next;
+            continue;
+        }else if(iterator->position == oldPosition){
+            iterator->position = newPosition;
+            iterator = iterator->next;
+            continue;
+        }
 
-
-
+        iterator = iterator->next;
+    }
+}
 
 
 

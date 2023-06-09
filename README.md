@@ -24,7 +24,7 @@ To run the program you'll need to export the directory path to the PATH environm
 dsh(){
     operate=$1
     position=$2
-    if [[ $operate -lt 5  && $operate -ge 0 ]]; then
+    if [[ $operate -lt 5 ]]; then
         directory=$(dasher $operate)
         if [[ $? == 0 ]]; then
             cd $directory

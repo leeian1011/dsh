@@ -99,7 +99,7 @@ void list_command(list *dasher){
     if(list_empty(dasher)) {fprintf(stderr, "No lanes have been set\n");}
 
     while(!list_empty(iterator)){
-        printf("%d: %s\n", iterator->position, iterator->lane);
+        fprintf(stdout, "%d: %s\n", iterator->position, iterator->lane);
         iterator = iterator->next;
     }
 
@@ -128,3 +128,33 @@ int dash_command(list *dasher, char *argv){
     free_lanes(dasher);
     return (0);
 }
+
+void help_command(){
+    fprintf(stdout, "Usage: dsh [a] [rm] [ls] [lane index]\n\t   [mv] [h] [sort]\n\n");
+    fprintf(stdout, "\ta\t adds current working directory to list of lanes\n");
+    fprintf(stdout, "\trm\t removes [lane index] from list of lanes\n");
+    fprintf(stdout, "\tls\t list all currently saved lanes and their positions\n");
+    fprintf(stdout, "   [lane index]\t 'dashes' to lane saved at specific index (changes directory)\n");
+    fprintf(stdout, "\tmv\t moves lane from current index position to next index position\n");
+}
+
+void move_command(list *dasher, char **argv){
+    int oldPosition = (int) argv[2][0] - '0';
+    int newPosition = (int) argv[3][0] - '0';
+    
+    if(oldPosition > 4 || newPosition > 4){
+        printf("rude");
+    }
+    move(dasher, oldPosition, newPosition);
+    save_lanes(dasher);
+    free_lanes(dasher);
+}
+
+
+
+
+
+
+
+
+

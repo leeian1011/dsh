@@ -13,18 +13,18 @@ static bool is_empty(FILE *persistentDir){
 }
 
 char *cache(){
-    char *directory = malloc(KILOBYTE);
-    FILE *test = popen("echo $TEST", "r");
-    if(test == NULL){
-        pclose(test);
-        free(directory);
+    char *pathToCache = getenv("DASH_CACHE");
+    if(pathToCache == NULL){
+        fprintf(stderr, "dsh: DASH_CACHE environment variable not set\n");
         return (NULL);
     }
-    
-    fread(directory, sizeof(char), KILOBYTE, test);
-    pclose(test);
-
-    directory[strlen(directory) - 1] = '\0';
+    char *directory = malloc(strlen(pathToCache) + 1);
+    if(directory == NULL){
+        free(directory);
+        fprintf(stderr, "dsh: memory error in load_lane\n");
+        return(NULL);
+    }
+    strcpy(directory, pathToCache);
 
     return directory;
 }
@@ -54,7 +54,7 @@ bool save_lanes(list *dasher){
     list *iterator = dasher;
 
    while(iterator != NULL){
-       fprintf(persistentDir, "%d\n", iterator->position);
+        fprintf(persistentDir, "%d\n", iterator->position);
         fprintf(persistentDir, "%s\n", iterator->lane);
         iterator = iterator->next;
    }
@@ -71,8 +71,8 @@ bool load_lanes(list **dasher){
     int newLineCount = 0;
     int positions[MAX_LANES];
     char laneBuffer[MAX_LANES][KILOBYTE];
-
-    FILE *persistentDir = fopen(cache(), "r");
+    char *pathToCache = cache();
+    FILE *persistentDir = fopen(pathToCache, "r");
     if(persistentDir == NULL){
         fclose(persistentDir);
         return (false);
@@ -131,10 +131,10 @@ bool load_lanes(list **dasher){
         create_lane(newLane[i], positions[i], laneBuffer[i]);
         append(&(*dasher), &newLane[i]);
     }
-         
+    
+    free(pathToCache); 
     fclose(persistentDir);
     return (true); 
-    
 }
 
 void free_lanes(list *dasher){
