@@ -18,11 +18,11 @@ A simple command line tool that lets me "dash" to project directories.
 Currently still a W.I.P and my peanut sized brain couldnt figure out that cd was a shell-specific built-in function.
 To run the program you'll need to export the directory path to the PATH environment variable and also include the shell function below
 
-> Copy paste this into your terminal rc file & include directory to $PATH variable!
+> Copy paste this into your terminal rc file & make sure to include the correct directory path for the $PATH variable!
 
 ```bash
-export DASH_CACHE="**_path/to_**/dash/cache/lanes.txt"
-export PATH="$PATH:**_path/to_**/dash"
+export DASH_CACHE="path/to/dash/cache/lanes.txt"
+export PATH="$PATH:path/to/dash"
 
 dsh(){
     operate=$1
