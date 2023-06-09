@@ -22,7 +22,7 @@ bool argc_check(int argc, int reqOptionCount, char command){
 
 int main(int argc, char **argv){
     if(argc == 1){
-        printf("Usage: dsh [a] [rm] [h] [ls] [lane index]\n");
+        fprintf(stderr, "Usage: dsh [a] [rm] [ls] [lane index]\n\t   [mv] [h] [sort]\n");
         exit(-1);
     }
     char commandIdentifier[] = {'a', 'd', 'g'};
