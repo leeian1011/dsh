@@ -87,6 +87,9 @@ This isnt a very elegant fix, there are many issues with it, whereby, if positio
 - Learned about shell function, that lets commands be ran in the current instance of the shell but can only be declared in the rc file.
 
 - Learned quite a lot about how shells work and a lot more about pipe and file descriptors, like how printing to the subshell's stdout prints to the parent shell's stdout because
-the subshell has the exact same file descriptor.
+the subshell has the exact same file descriptor. And also why the parent shell has to call fork/clone in order to use exec* to oopen external programs.
+If it doesn't it defeats the purpose because the exec system call essentially overwrites the parent shell "program" with the just called exec'd program.
+
+- Currently using a simply shell function to get intended behaviour with the program!, will continue to learn more and try figuring out how to make installations.
 
 
