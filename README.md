@@ -1,14 +1,15 @@
 # DSH
+Also known as Direct Access through SHell ~~function~~.
 
 A simple command line tool that lets me "dash" to project directories. 
 
 ## The Problem & the Solution
 
 ![slowly cd-ls](https://github.com/leeian1011/dsh/blob/fastlane/imgandgif/problemgif.gif)
-> Look at this can you even watch till the end ??
+> Slow & Steady
 
 ![superfastquickafdsh](https://github.com/leeian1011/dsh/blob/fastlane/imgandgif/solutiongif.gif)
-> Now look at this DSHHHHHHHHH
+> DSH-ING THROUGH
 
 ## Notes
 
