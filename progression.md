@@ -92,4 +92,17 @@ If it doesn't it defeats the purpose because the exec system call essentially ov
 
 - Currently using a simply shell function to get intended behaviour with the program!, will continue to learn more and try figuring out how to make installations.
 
+5. mv-ing the positions and making sure that the positions are always displayed sorted.
+
+- simple loop yessir now we've just gotta sort the linked list. I could do something like a bubble sort or a linear sort but nah thats mind
+I'm gonna try and wrap my head around quick sorting a linked list yessir.
+
+
+
+
+
+
+
+
+
 
