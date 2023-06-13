@@ -1,4 +1,19 @@
 #include "dsh.h"
+/* Standard list functions, searching, appending, indexing into etc */ 
+
+
+static int list_length(list *dasher){
+    list *iterator = dasher;
+    int length = 0;
+    while(1){
+        if(iterator->next == NULL) {
+            return length;
+        }
+        length++;
+        iterator = iterator->next;
+    }
+
+}
 
 bool list_empty(list *dasher){
     if(dasher == NULL) {return (true);}
@@ -89,19 +104,8 @@ void move(list *dasher, int newPosition, int oldPosition){
     }
 }
 
-static int list_length(list *dasher){
-    list *iterator = dasher;
-    int length = 0;
-    while(1){
-        if(iterator->next == NULL) {
-            return length;
-        }
-        length++;
-        iterator = iterator->next;
-    }
 
-}
-
+/* Insertion sort algo */
 void sort(list **dasher){
     list *iterator = (*dasher)->next;
     if(iterator == NULL){

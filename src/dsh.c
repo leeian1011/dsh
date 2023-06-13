@@ -1,5 +1,6 @@
 #include "dsh.h"
 
+/* Checks corresponding command and it's required number of arugments */ 
 bool argc_check(int argc, int reqOptionCount, char command){
     if(argc != reqOptionCount){
         switch(command){
@@ -25,7 +26,7 @@ bool argc_check(int argc, int reqOptionCount, char command){
 
 int main(int argc, char **argv){
     if(argc == 1){
-        fprintf(stderr, "Usage: dsh [a] [rm] [ls] [lane index]\n\t   [mv] [h] [sort]\n");
+        fprintf(stderr, "Usage: dsh [a] [rm] [ls] [lane index]\n\t   [mv] [h]\n");
         exit(-1);
     }
     char commandIdentifier[] = {'a', 'd', 'g', 'm'};
@@ -54,9 +55,6 @@ int main(int argc, char **argv){
         case 4:
             if(!argc_check(argc, 4, commandIdentifier[3])) {exit(-1);}
             move_command(&dasher, argv);
-            break;
-        case 5:
-            printf("sort called\n");
             break;
         case 'g':
             if(!argc_check(argc, 2, commandIdentifier[2])) {exit(-1);}

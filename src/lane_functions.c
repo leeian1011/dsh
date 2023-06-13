@@ -1,5 +1,7 @@
 #include "dsh.h"
 
+/* Used specifically in lane_functions.c functions 
+ * checks if a the file lanes.txt is empty */
 static bool is_empty(FILE *persistentDir){
     fseek(persistentDir, 0, SEEK_END);
     long check = ftell(persistentDir);
@@ -12,6 +14,7 @@ static bool is_empty(FILE *persistentDir){
     return true;
 }
 
+/* function that returns a string pointer to directory path where lanes.txt is stored */ 
 char *cache(){
     char *pathToCache = getenv("DASH_CACHE");
     if(pathToCache == NULL){
@@ -29,6 +32,7 @@ char *cache(){
     return directory;
 }
 
+/* function that returns a string pointer to the current working directory */
 char *set_directory(){
     char *directory = malloc(KILOBYTE);
     FILE *currentDirectory = popen("pwd", "r");
@@ -45,6 +49,7 @@ char *set_directory(){
     return directory;
 }
 
+/* writes to lanes.txt the list separating position & lanes with '\n' */
 bool save_lanes(list *dasher){
     char *cacheDir = cache();
     FILE *persistentDir = fopen(cacheDir, "w");
@@ -68,6 +73,7 @@ bool save_lanes(list *dasher){
    return (true);
 }
 
+/* reads from lanes.txt into the list structure dasher */
 bool load_lanes(list **dasher){
     char c;
     int laneIndex = 0;
@@ -154,6 +160,7 @@ void free_lanes(list *dasher){
     }
 }
 
+/* checks if current working directory already exists in list */
 bool check_duplicate(list *dasher, char *directory){
     list *iterator = dasher;
     while(iterator != NULL){
