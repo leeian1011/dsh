@@ -61,29 +61,29 @@ dsh(){
 
 - Lanes are just the path to directory saved on dsh, while \[lane index] is the position or number mapped to the lane.
 
-2. dsh a
+2. `dsh a`
 
 - Simple add function that adds the current working directory, the same path you'd get if you'd inputted pwd into the terminal, to dsh.
 
 - It takes 0 arguments.
 
-3. dsh rm
+3. `dsh rm`
 
 - Removes a \[lane index] and it's corresponding lane from dsh.
 
 - Removes only 1 \[lane index] at a time.
 
-4. dsh ls 
+4. `dsh ls` 
 
 - Lists all currently saved lanes and their corresponding \[lane index] in ascending order.
 
-5. dsh mv 
+5. `dsh mv` 
 
 - Moves a \[lane index] to a new index.
 
 - If the new index already has a lane attached to it, the command will still run and replace the lane's \[lane index] with the moved \[lane index].
 
-6. dsh \[lane index]
+6. `dsh \[lane index]`
 
 - Changes the current working directory to whatever lane is stored in \[lane index].
 
