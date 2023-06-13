@@ -97,6 +97,9 @@ If it doesn't it defeats the purpose because the exec system call essentially ov
 - simple loop yessir now we've just gotta sort the linked list. I could do something like a bubble sort or a linear sort but nah thats mind
 I'm gonna try and wrap my head around quick sorting a linked list yessir.
 
+- okay so my tiny pea brain just realized the way I implemeneted the linked list is horrid, i dont exactly have a head pointer nor do i have a tail pointer, and I'd have to do a lot of refactoring to implement those, I'll need to implement these if I wanted to get quicksort up and quick, so I've decided to just throw in the towel and brush
+up on a simpler sorting algorithm, the good old insertion sort!
+
 
 
 

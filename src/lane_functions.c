@@ -46,20 +46,25 @@ char *set_directory(){
 }
 
 bool save_lanes(list *dasher){
-    FILE *persistentDir = fopen(cache(), "w");
+    char *cacheDir = cache();
+    FILE *persistentDir = fopen(cacheDir, "w");
     if(persistentDir == NULL){
         fclose(persistentDir);
         return (false);
     }
     list *iterator = dasher;
-
+    if(list_empty(dasher)){
+        fclose(persistentDir);
+        return(true);
+    }
    while(iterator != NULL){
         fprintf(persistentDir, "%d\n", iterator->position);
         fprintf(persistentDir, "%s\n", iterator->lane);
         iterator = iterator->next;
    }
-    
+
    fclose(persistentDir);
+   free(cacheDir); 
    return (true);
 }
 

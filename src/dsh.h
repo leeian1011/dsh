@@ -32,6 +32,7 @@ char *lane_at(list *dasher, int index);
 void append(list **dasher, list **newLane);
 void remove_at(list *dasher, int position);
 void move(list *dasher, int oldPosition, int newPosition);
+void sort(list **dasher);
 
 /* command_functions.c */
 int add_command(list **dasher);
@@ -39,7 +40,7 @@ int remove_command(list *dasher, char *argv);
 void list_command(list *dasher);
 int dash_command(list *dasher, char *argv);
 void help_command();
-void move_command(list *dasher, char **argv);
+void move_command(list **dasher, char **argv);
 /* options.c */
 char get_option(int argc, char **argv);
 void closest_option(char option);

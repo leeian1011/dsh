@@ -46,7 +46,7 @@ int add_command(list **dasher){
 
     create_lane(newLane, newPosition, newDirectory);
     append(&(*dasher), &newLane); 
-
+    sort(&(*dasher));
     if(!save_lanes(*dasher)){
         fprintf(stderr, "dsh: could not save current directory\n");
         free_lanes(*dasher);
@@ -69,6 +69,13 @@ int remove_command(list *dasher, char *argv){
     list *prev = NULL;
 
     while(!list_empty(iterator)){
+        if(dasher->position == removePosition && dasher->next == NULL){
+            free(dasher->lane);
+            free(dasher);
+            save_lanes(dasher);
+            return(0);
+        }
+
         if(iterator->position == removePosition && dasher->position == removePosition){
             dasher = iterator->next;
             break;
@@ -138,17 +145,21 @@ void help_command(){
     fprintf(stdout, "\tmv\t moves lane from current index position to next index position\n");
 }
 
-void move_command(list *dasher, char **argv){
+void move_command(list **dasher, char **argv){
     int oldPosition = (int) argv[2][0] - '0';
     int newPosition = (int) argv[3][0] - '0';
     
     if(oldPosition > 4 || newPosition > 4){
-        printf("rude");
+        fprintf(stderr, "dsh: maximum position index = 4\n");
+        free_lanes(*dasher);
+        return;
     }
-    move(dasher, oldPosition, newPosition);
-    save_lanes(dasher);
-    free_lanes(dasher);
+    move((*dasher), oldPosition, newPosition);
+    sort(&(*dasher));
+    save_lanes((*dasher));
+    free_lanes((*dasher));
 }
+
 
 
 

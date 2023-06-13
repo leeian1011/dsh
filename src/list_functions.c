@@ -89,11 +89,56 @@ void move(list *dasher, int newPosition, int oldPosition){
     }
 }
 
+static int list_length(list *dasher){
+    list *iterator = dasher;
+    int length = 0;
+    while(1){
+        if(iterator->next == NULL) {
+            return length;
+        }
+        length++;
+        iterator = iterator->next;
+    }
 
+}
 
-
-
-
-
-
+void sort(list **dasher){
+    list *iterator = (*dasher)->next;
+    if(iterator == NULL){
+        return;
+    }
+    list *previousIterator = (*dasher);
+    list *sortedIterator = (*dasher);
+    list *previousSortedIterator = NULL;
+   
+    int dasherLen = list_length(*dasher) + 1;
+    int count = 1;
+    while(count < dasherLen){
+        for(int i = 0; i < count; i++){
+            if(iterator->position < sortedIterator->position){
+                if(previousSortedIterator == NULL){
+                    previousIterator->next = iterator->next;;
+                    iterator->next = sortedIterator;
+                    *dasher = iterator;
+                    break;
+                }
+                previousIterator->next = iterator->next;
+                iterator->next = sortedIterator;
+                previousSortedIterator->next = iterator;
+                previousSortedIterator = previousSortedIterator->next;
+                break;
+            }
+            if(sortedIterator->next == iterator){
+                previousIterator = iterator;
+                break;
+            }
+            previousSortedIterator = sortedIterator;
+            sortedIterator = sortedIterator->next;
+        }
+        iterator = previousIterator->next;
+        sortedIterator = (*dasher);
+        previousSortedIterator = NULL;
+        count++;
+    }
+}
 

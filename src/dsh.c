@@ -53,7 +53,7 @@ int main(int argc, char **argv){
             break;
         case 4:
             if(!argc_check(argc, 4, commandIdentifier[3])) {exit(-1);}
-            move_command(dasher, argv);
+            move_command(&dasher, argv);
             break;
         case 5:
             printf("sort called\n");
