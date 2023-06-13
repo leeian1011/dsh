@@ -94,13 +94,20 @@ If it doesn't it defeats the purpose because the exec system call essentially ov
 
 5. mv-ing the positions and making sure that the positions are always displayed sorted.
 
-- simple loop yessir now we've just gotta sort the linked list. I could do something like a bubble sort or a linear sort but nah thats mind
+- simple loop yessir now we've just gotta sort the linked list. I could do something like a bubble sort or a linear sort but nah thats mid 
 I'm gonna try and wrap my head around quick sorting a linked list yessir.
 
-- okay so my tiny pea brain just realized the way I implemeneted the linked list is horrid, i dont exactly have a head pointer nor do i have a tail pointer, and I'd have to do a lot of refactoring to implement those, I'll need to implement these if I wanted to get quicksort up and quick, so I've decided to just throw in the towel and brush
-up on a simpler sorting algorithm, the good old insertion sort!
+- okay so my tiny pea brain just realized the way I implemeneted the linked list is horrid, i dont exactly have a tail pointer,
+and I'd have to do a lot of refactoring to implement those, I'll need to implement these if I wanted to get quicksort up and quick,
+so I've decided to just throw in the towel and brush up on a simpler sorting algorithm, the good old insertion sort!
 
+6. Insertion sort
 
+- I understood how the algorithm works, just had to refresh a little bit, watched a youtube video about how the sorting algorithm works
+(visualization) and just went with that trying to figure out how it works.
+
+- Had a minor issue implementing the sorting algorithm because of all the overhead of working with a linked list but it wasnt the worst, just had 
+to brush up on how I would loop through a sorted list while it's still linked to the unsorted list.
 
 
 
