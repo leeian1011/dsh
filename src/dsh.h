@@ -6,7 +6,7 @@
 #include <string.h>
 
 #define MAX_LANES 5 
-#define MAX_COMMANDS 6
+#define MAX_COMMANDS 5 
 #define KILOBYTE 1024
 
 typedef struct list{

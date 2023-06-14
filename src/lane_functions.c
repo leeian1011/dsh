@@ -114,7 +114,8 @@ bool load_lanes(list **dasher){
             laneByteCount++;
         }
     }
-
+    free(pathToCache);
+    
      list *newLane[laneIndex];
      for(int i = 0; i < laneIndex; i++){
         newLane[i] = malloc(sizeof(list));
@@ -143,7 +144,6 @@ bool load_lanes(list **dasher){
         append(&(*dasher), &newLane[i]);
     }
     
-    free(pathToCache); 
     fclose(persistentDir);
     return (true); 
 }

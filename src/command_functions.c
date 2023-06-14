@@ -115,6 +115,7 @@ void list_command(list *dasher){
 
 int dash_command(list *dasher, char *argv){
     int dashTo = atoi(argv);
+
     if(dashTo >= MAX_LANES){
         fprintf(stderr, "dsh: position '%d' does not exist\n\tOnly '0' to '%d' lanes available\n", dashTo, (MAX_LANES - 1));
         free_lanes(dasher);
