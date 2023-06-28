@@ -90,6 +90,7 @@ bool load_lanes(list **dasher){
     }
     
     if(is_empty(persistentDir)){
+        free(pathToCache);
         fclose(persistentDir);
         return (true);
     }
