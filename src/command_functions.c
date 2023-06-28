@@ -105,6 +105,7 @@ void list_command(list *dasher){
     list *iterator = dasher;
     if(list_empty(dasher)) {fprintf(stderr, "No lanes have been set\n");}
 
+
     while(!list_empty(iterator)){
         fprintf(stdout, "%d: %s\n", iterator->position, iterator->lane);
         iterator = iterator->next;
@@ -149,7 +150,12 @@ void help_command(){
 void move_command(list **dasher, char **argv){
     int oldPosition = (int) argv[2][0] - '0';
     int newPosition = (int) argv[3][0] - '0';
-    
+    if(list_empty(*dasher)){
+        fprintf(stderr, "No lanes have been set\n");
+        free_lanes((*dasher));
+        return;
+    }
+
     if(oldPosition > 4 || newPosition > 4){
         fprintf(stderr, "dsh: maximum position index = 4\n");
         free_lanes(*dasher);
