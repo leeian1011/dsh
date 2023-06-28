@@ -63,6 +63,7 @@ int main(int argc, char **argv){
         default :
             fprintf(stderr, "dsh: '%s' is not a valid command, use 'dsh h' for help.\n", argv[1]);
             closest_option(argv[1][0]);
+            free_lanes(dasher);
             return(-1);
     }
     return 0;
